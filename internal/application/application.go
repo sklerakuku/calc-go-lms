@@ -69,6 +69,7 @@ type Request struct {
 }
 
 func CalcHandler(w http.ResponseWriter, r *http.Request) {
+	//fmt.Fprintf(w, ":)))) \n")
 	request := new(Request)
 	defer r.Body.Close()
 	err := json.NewDecoder(r.Body).Decode(&request)
