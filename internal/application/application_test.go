@@ -1,5 +1,15 @@
 package application_test
 
+/*import (
+	"bytes"
+	"net/http"
+	"net/http/httptest"
+	"strings"
+	"testing"
+
+	"github.com/sklerakuku/calc-go-lms/internal/application"
+)*/
+
 /*
 
 прописать тесты для handler-ов
@@ -11,5 +21,5 @@ package application_test
 прописать файл readme.md
 
 
-
+你好， 你的妈！
 */

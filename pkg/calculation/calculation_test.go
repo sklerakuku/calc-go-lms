@@ -1,4 +1,4 @@
-package calculation_test
+package calculation_test //coverage: 90.8% dkjfs <-----
 
 import (
 	"testing"
@@ -16,6 +16,11 @@ func TestCalc(t *testing.T) {
 			name:           "simple",
 			expression:     "1+1",
 			expectedResult: 2,
+		},
+		{
+			name:           "simple",
+			expression:     "1-1",
+			expectedResult: 0,
 		},
 		{
 			name:           "priority",
@@ -66,6 +71,10 @@ func TestCalc(t *testing.T) {
 		{
 			name:       "empty",
 			expression: "",
+		},
+		{
+			name:       "simple",
+			expression: "1/0",
 		},
 	}
 

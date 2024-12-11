@@ -50,10 +50,12 @@ func Calc(expression string) (float64, error) {
 	}
 
 	for i := 0; i < len(expression); {
+
+		/*//удаление пробелов теперь в application
 		if expression[i] == ' ' {
 			i++
 			continue
-		}
+		}*/
 
 		if expression[i] >= '0' && expression[i] <= '9' || expression[i] == '.' {
 			numStr := ""
