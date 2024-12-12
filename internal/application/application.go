@@ -87,6 +87,7 @@ func CalcHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (a Application) RunServer() error {
+	log.Println("Server Run...")
 	http.HandleFunc("/", CalcHandler)
 	return http.ListenAndServe(":"+a.config.Addr, nil)
 }
