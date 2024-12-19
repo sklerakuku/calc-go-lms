@@ -35,7 +35,7 @@ Yandex lyceum Go final sprit 0 project. no-gui calculator app
 - [[#^59f5d0|Некорректный запрос - 500 (Internal Server Error)]]
 
 
-Найдем чему равно выражение `2+2*2`, для этого отправим POST запрос сервису ^a0c94d
+Найдем чему равно выражение `2+2*2`, для этого отправим POST запрос сервису 
 
 ```cURL
 curl --location 'http://localhost:8080/api/v1/calculate' \
@@ -53,7 +53,7 @@ curl --location 'http://localhost:8080/api/v1/calculate' \
 }
 ```
 
-Если мы допустим в выражении ошибку, напишем высказывание с буквами `a+2*b` ^bd360b
+Если мы допустим в выражении ошибку, напишем высказывание с буквами `a+2*b` 
 
 ```cURL
 curl --location 'http://localhost:8080/api/v1/calculate' \
@@ -71,7 +71,7 @@ curl --location 'http://localhost:8080/api/v1/calculate' \
 }
 ```
 
-В случаи иного некорректного запроса, получи ошибку  «Что-то пошло не так» ^59f5d0
+В случаи иного некорректного запроса, получи ошибку  «Что-то пошло не так» 
 
 ```cURL
 curl --location 'http://localhost:8080/api/v1/calculate' \
