@@ -70,24 +70,71 @@ type Request struct {
 
 func CalcHandler(w http.ResponseWriter, r *http.Request) {
 	//fmt.Fprintf(w, ":)))) \n")
-	request := new(Request)
-	defer r.Body.Close()
-	err := json.NewDecoder(r.Body).Decode(&request)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
+	w.Header().Set("Content-Type", "application/json")
+	switch r.Method {
+	case "POST":
+		request := new(Request)
+		defer r.Body.Close()
+		err := json.NewDecoder(r.Body).Decode(&request)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
 
-	result, err := calculation.Calc(request.Expression)
-	if err != nil {
-		fmt.Fprintf(w, "err: %s", err.Error())
-	} else {
-		fmt.Fprintf(w, "result: %f", result)
+		result, err := calculation.Calc(request.Expression)
+		if err != nil {
+			log.Printf("NOT OK: err is %s\n", err.Error())
+			w.WriteHeader(http.StatusUnprocessableEntity)
+			fmt.Fprintf(w, `{"error": "Expression is not valid"}`)
+		} else {
+			log.Printf("OK: result is %f\n", result)
+			w.WriteHeader(http.StatusOK)
+			fmt.Fprintf(w, `{"result": "%f"}`, result)
+		}
+	default:
+		log.Println("not POST request")
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte(`{"error": "Internal server error"}`))
 	}
 }
 
-func (a Application) RunServer() error {
-	log.Println("Server Run...")
-	http.HandleFunc("/", CalcHandler)
-	return http.ListenAndServe(":"+a.config.Addr, nil)
+/*type server struct{}
+
+func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	switch r.Method {
+	case "GET":
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte(`{"message": "get called"}`))
+	case "POST":
+		w.WriteHeader(http.StatusCreated)
+		w.Write([]byte(`{"message": "post called"}`))
+	case "PUT":
+		w.WriteHeader(http.StatusAccepted)
+		w.Write([]byte(`{"message": "put called"}`))
+	case "DELETE":
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte(`{"message": "delete called"}`))
+	default:
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte(`{"message": "not found"}`))
+	}
+}*/
+
+func hello(w http.ResponseWriter, req *http.Request) {
+	fmt.Fprintf(w, "hello\n")
+}
+
+func nihao(w http.ResponseWriter, req *http.Request) {
+	fmt.Fprintf(w, "你好！\n")
+}
+
+func (a Application) RunServer() {
+	log.Println("Server Run...\nhttp://localhost:8080/api/v1/calculate")
+	http.HandleFunc("/hello", hello)
+	http.HandleFunc("/nihao", nihao)
+	http.HandleFunc("/api/v1/calculate", CalcHandler)
+	//return http.ListenAndServe(":"+a.config.Addr, nil)
+
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
