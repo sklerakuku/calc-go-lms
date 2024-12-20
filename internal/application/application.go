@@ -64,6 +64,15 @@ func (a *Application) Run() error {
 	}
 }
 
+func hasLetters(s string) bool {
+	for _, r := range s {
+		if r >= 'a' && r <= 'z' || r >= 'A' && r <= 'Z' {
+			return true
+		}
+	}
+	return false
+}
+
 type Request struct {
 	Expression string `json:"expression"`
 }
@@ -77,7 +86,15 @@ func CalcHandler(w http.ResponseWriter, r *http.Request) {
 		defer r.Body.Close()
 		err := json.NewDecoder(r.Body).Decode(&request)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			//http.Error(w, err.Error(), http.StatusBadRequest)
+			w.WriteHeader(http.StatusInternalServerError)
+			fmt.Fprintf(w, `{"error": "Internal server error"}`)
+			return
+		}
+
+		if hasLetters(request.Expression) {
+			w.WriteHeader(http.StatusBadRequest)
+			fmt.Fprintf(w, `{"error": "Expression is not valid"}`)
 			return
 		}
 
@@ -136,5 +153,5 @@ func (a Application) RunServer() {
 	http.HandleFunc("/api/v1/calculate", CalcHandler)
 	//return http.ListenAndServe(":"+a.config.Addr, nil)
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":"+a.config.Addr, nil))
 }

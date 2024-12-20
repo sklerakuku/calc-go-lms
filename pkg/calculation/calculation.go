@@ -6,25 +6,21 @@ import (
 	"strconv"
 )
 
-// parseFloat конвертирует строку в float64
 func parseFloat(s string) (float64, error) {
 	return strconv.ParseFloat(s, 64)
 }
 
-// округление
 func roundFloat(val float64, precision uint) float64 {
 	ratio := math.Pow(10, float64(precision))
 	return math.Round(val*ratio) / ratio
 }
 
-// Calc вычисляет арифметическое выражение, данное в виде строки.
 func Calc(expression string) (float64, error) {
-	// Стек для операндов
+
 	var operandStack []float64
 	var operatorStack []rune
 
-	// Приоритет операторов
-	priority := map[rune]int{
+	priority := map[rune]int{ // Приоритет операторов
 		'+': 1,
 		'-': 1,
 		'*': 2,
@@ -51,11 +47,11 @@ func Calc(expression string) (float64, error) {
 
 	for i := 0; i < len(expression); {
 
-		/*//удаление пробелов теперь в application
+		//удаление пробелов теперь в application cmd ver.
 		if expression[i] == ' ' {
 			i++
 			continue
-		}*/
+		}
 
 		if expression[i] >= '0' && expression[i] <= '9' || expression[i] == '.' {
 			numStr := ""
