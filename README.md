@@ -53,7 +53,7 @@ Yandex lyceum Go final sprit 0 project. no-gui calculator app
 
 #### Найдем чему равно выражение `2+2*2`, для этого отправим POST запрос сервису 
 
-```curl
+```cURL
 curl --location 'http://localhost:8080/api/v1/calculate' \
 --header 'Content-Type: application/json' \
 --data '{
@@ -65,7 +65,7 @@ curl --location 'http://localhost:8080/api/v1/calculate' \
 
 ```json
 {
-    "result": "6.000000"
+    "result": "6.000000"
 }
 ```
 
@@ -86,7 +86,7 @@ curl --location 'http://localhost:8080/api/v1/calculate' \
 
 ```json
 {
-    "error": "Expression is not valid"
+    "error": "Expression is not valid"
 }
 ```
 
@@ -105,7 +105,7 @@ curl --location 'http://localhost:8080/api/v1/calculate' \
 
 ```json
 {
-    "error": "Internal server error"
+    "error": "Internal server error"
 }
 ```
 
@@ -120,7 +120,7 @@ curl --location 'http://localhost:8080/api/v1/calculate' \
 <td>
 
 
-```cURL
+```c
 curl --location 'http://localhost:8080/api/v1/calculate' \
 --header 'Content-Type: application/json' \
 --data '{
@@ -147,7 +147,7 @@ curl --location 'http://localhost:8080/api/v1/calculate' \
 <td>
 
 
-```cURL
+```c
 curl --location 'http://localhost:8080/api/v1/calculate' \
 --header 'Content-Type: application/json' \
 --data '{
@@ -162,7 +162,7 @@ curl --location 'http://localhost:8080/api/v1/calculate' \
 
 ```json
 {
-    "error": "Expression is not valid"
+    "error": "Expression is not valid"
 }
 ```
 
@@ -173,7 +173,7 @@ curl --location 'http://localhost:8080/api/v1/calculate' \
 <td>
 
 
-```curl
+```c
 curl --location 'http://localhost:8080/api/v1/calculate' \
 --header 'Content-Type: application/json' \
 --data '{
@@ -188,7 +188,7 @@ curl --location 'http://localhost:8080/api/v1/calculate' \
 
 ```json
 {
-    "error": "Internal server error"
+    "error": "Internal server error"
 }
 ```
 
