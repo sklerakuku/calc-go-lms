@@ -1,15 +1,17 @@
-# calc-go-lms
+# calc-go-lms 🦺🎇
 Yandex lyceum Go final sprit 0 project. no-gui calculator app 
 
-![image](https://github.com/user-attachments/assets/f0e9462a-ae13-454c-a450-9e3d1fc85a06)
+
 
 - [x] b（￣▽￣）d　
 - [ ] 🐱‍🏍
 
-## ---------------------
+## -------------------------------------------------------------------/______/..
 # 🔢 API Простого калькулятора
 
 Веб-сервис, который вычисляет арифметические выражения, пользователь отправляет арифметическое выражение по HTTP и получает в ответ его результат.
+
+<br><br>
 
 ## 💻 Запуск сервиса
 
@@ -18,6 +20,8 @@ Yandex lyceum Go final sprit 0 project. no-gui calculator app
 ### Альтернативный способ
 
 Скачать всю папку calc-go-lms и запустить сервер `go run ./...`
+
+<br><br>
 
 ## 🧮 Немного о работе сервиса
 
@@ -35,6 +39,8 @@ Yandex lyceum Go final sprit 0 project. no-gui calculator app
 }
 ```
 
+<br><br>
+
 ## 🖼 Примеры использования
 
 —— [Корректный запрос - 200 (OK)](https://github.com/sklerakuku/calc-go-lms/tree/main?tab=readme-ov-file#%D0%BD%D0%B0%D0%B9%D0%B4%D0%B5%D0%BC-%D1%87%D0%B5%D0%BC%D1%83-%D1%80%D0%B0%D0%B2%D0%BD%D0%BE-%D0%B2%D1%8B%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5-222-%D0%B4%D0%BB%D1%8F-%D1%8D%D1%82%D0%BE%D0%B3%D0%BE-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BC-post-%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D1%83)
@@ -43,7 +49,7 @@ Yandex lyceum Go final sprit 0 project. no-gui calculator app
 
 —— [Некорректный запрос - 500 (Internal Server Error)](https://github.com/sklerakuku/calc-go-lms/tree/main?tab=readme-ov-file#%D0%B2-%D1%81%D0%BB%D1%83%D1%87%D0%B0%D0%B8-%D0%B8%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BD%D0%B5%D0%BA%D0%BE%D1%80%D1%80%D0%B5%D0%BA%D1%82%D0%BD%D0%BE%D0%B3%D0%BE-%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%B0-%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B8-%D0%BE%D1%88%D0%B8%D0%B1%D0%BA%D1%83--%D1%87%D1%82%D0%BE-%D1%82%D0%BE-%D0%BF%D0%BE%D1%88%D0%BB%D0%BE-%D0%BD%D0%B5-%D1%82%D0%B0%D0%BA)
 
-
+<br><br>
 
 #### Найдем чему равно выражение `2+2*2`, для этого отправим POST запрос сервису 
 
@@ -63,7 +69,7 @@ curl --location 'http://localhost:8080/api/v1/calculate' \
 }
 ```
 
-
+<br><br>
 
 
 #### Если мы допустим в выражении ошибку, напишем высказывание с буквами `a+2*b` 
@@ -84,7 +90,7 @@ curl --location 'http://localhost:8080/api/v1/calculate' \
 }
 ```
 
-
+<br><br>
 
 
 #### В случаи иного некорректного запроса, получи ошибку  «Что-то пошло не так» 
@@ -103,3 +109,93 @@ curl --location 'http://localhost:8080/api/v1/calculate' \
 }
 ```
 
+<br><br><br>
+
+<table>
+<tr>
+<td> Status </td> <td> Request </td> <td> Response </td>
+</tr>
+<tr>
+<td> 200 (OK) </td>
+<td>
+
+
+```cURL
+curl --location 'http://localhost:8080/api/v1/calculate' \
+--header 'Content-Type: application/json' \
+--data '{
+    "expression": "a + 2*b"
+}'
+```
+
+
+</td>
+<td>
+
+
+```json
+{
+    "result": "6.000000"
+}
+```
+
+
+</td>
+
+<tr>
+<td> 422 </td>
+<td>
+
+
+```cURL
+curl --location 'http://localhost:8080/api/v1/calculate' \
+--header 'Content-Type: application/json' \
+--data '{
+    "expression": "a + 2*b"
+}'
+```
+
+
+</td>
+<td>
+
+
+```JSON
+{
+    "error": "Expression is not valid"
+}
+```
+
+
+</td>
+<tr>
+<td> 500 </td>
+<td>
+
+
+```cURL
+curl --location 'http://localhost:8080/api/v1/calculate' \
+--header 'Content-Type: application/json' \
+--data '{
+    
+'
+```
+
+
+</td>
+<td>
+
+
+```JSON
+{
+    "error": "Internal server error"
+}
+```
+
+
+</td>
+</table>
+
+<br>
+
+![image](https://github.com/user-attachments/assets/f0e9462a-ae13-454c-a450-9e3d1fc85a06)
