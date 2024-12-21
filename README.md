@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/4a47a4d2-4c5e-4817-b9d5-70ba91cf62a4)# calc-go-lms
+# calc-go-lms
 Yandex lyceum Go final sprit 0 project. no-gui calculator app 
 
 ![image](https://github.com/user-attachments/assets/f0e9462a-ae13-454c-a450-9e3d1fc85a06)
