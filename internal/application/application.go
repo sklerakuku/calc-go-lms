@@ -64,7 +64,7 @@ func (a *Application) Run() error {
 	}
 }
 
-func hasLetters(s string) bool {
+func HasLetters(s string) bool {
 	for _, r := range s {
 		if r >= 'a' && r <= 'z' || r >= 'A' && r <= 'Z' {
 			return true
@@ -92,7 +92,7 @@ func CalcHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		if hasLetters(request.Expression) {
+		if HasLetters(request.Expression) {
 			w.WriteHeader(http.StatusBadRequest)
 			fmt.Fprintf(w, `{"error": "Expression is not valid"}`)
 			return
