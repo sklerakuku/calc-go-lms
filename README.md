@@ -1,6 +1,7 @@
 # calc-go-lms 🦺🎇
 Yandex lyceum Go final sprit 0 project. no-gui calculator app 
 
+[Englishh readme ver.](https://github.com/sklerakuku/calc-go-lms/blob/main/README.en.md)
 
 
 - [x] b（￣▽￣）d　
