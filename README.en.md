@@ -19,15 +19,17 @@ Download the entire `calc-go-lms` folder and run the server using `go run ./...`
 
 The service has 1 endpoint with the URL `/api/v1/calculate`
 
+```
 /api/v1/calculate
-text
+```
 
 To get the solution, send a POST request to this URL with the body:
 
+```json
 {
 "expression": "the expression to be solved"
 }
-text
+```
 
 <br><br>
 
