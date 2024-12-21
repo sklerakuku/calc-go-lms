@@ -9,7 +9,7 @@ Yandex lyceum Go final sprit 0 project. no-gui calculator app
 
 ## Запуск сервиса
 
-Для запуска сервера на своём компьютере скачайте файл [server.exe](https://github.com/sklerakuku/calc-go-lms/releases/tag/exe](https://github.com/sklerakuku/calc-go-lms/releases/download/exe/server.exe)
+Для запуска сервера на своём компьютере скачайте файл [server.exe](https://github.com/sklerakuku/calc-go-lms/releases/download/exe/server.exe)
 
 
 ## Немного о работе сервиса
