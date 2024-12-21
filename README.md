@@ -1,6 +1,8 @@
 # calc-go-lms
 Yandex lyceum Go final sprit 0 project. no-gui calculator app 
 
+![image](https://github.com/user-attachments/assets/f0e9462a-ae13-454c-a450-9e3d1fc85a06)
+
 
 ## ---------------------
 # API Простого калькулятора
