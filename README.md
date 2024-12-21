@@ -53,7 +53,7 @@ Yandex lyceum Go final sprit 0 project. no-gui calculator app
 
 #### Найдем чему равно выражение `2+2*2`, для этого отправим POST запрос сервису 
 
-```cURL
+```curl
 curl --location 'http://localhost:8080/api/v1/calculate' \
 --header 'Content-Type: application/json' \
 --data '{
@@ -63,7 +63,7 @@ curl --location 'http://localhost:8080/api/v1/calculate' \
 
 Получим ожидаемый ответ `6` и кодом 200 (OK)
 
-```JSON
+```json
 {
     "result": "6.000000"
 }
@@ -84,7 +84,7 @@ curl --location 'http://localhost:8080/api/v1/calculate' \
 
 Получим ошибку и код 422 (Unprocessable Entity)
 
-```JSON
+```json
 {
     "error": "Expression is not valid"
 }
@@ -103,7 +103,7 @@ curl --location 'http://localhost:8080/api/v1/calculate' \
 '
 ```
 
-```JSON
+```json
 {
     "error": "Internal server error"
 }
@@ -160,7 +160,7 @@ curl --location 'http://localhost:8080/api/v1/calculate' \
 <td>
 
 
-```JSON
+```json
 {
     "error": "Expression is not valid"
 }
@@ -173,7 +173,7 @@ curl --location 'http://localhost:8080/api/v1/calculate' \
 <td>
 
 
-```cURL
+```curl
 curl --location 'http://localhost:8080/api/v1/calculate' \
 --header 'Content-Type: application/json' \
 --data '{
@@ -186,7 +186,7 @@ curl --location 'http://localhost:8080/api/v1/calculate' \
 <td>
 
 
-```JSON
+```json
 {
     "error": "Internal server error"
 }
