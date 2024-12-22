@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/sklerakuku/calc-go-lms/pkg/calculation"
 )
@@ -64,6 +65,49 @@ func (a *Application) Run() error {
 	}
 }
 
+func LoggingMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now()
+
+		// Логируем информацию о запросе
+		log.Printf("Запрос: %s %s", r.Method, r.URL.Path)
+
+		// Передаём управление следующему обработчику
+		next.ServeHTTP(w, r)
+
+		// Вычисляем время выполнения запроса
+		duration := time.Since(start)
+		log.Printf("Время выполнения запроса: %s", duration)
+	})
+}
+
+func RecoveryMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		defer func() {
+			if err := recover(); err != nil {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"error": "Internal server error"}`)
+				log.Printf("Recovered from panic: %v", err)
+			}
+		}()
+		next.ServeHTTP(w, r)
+	})
+}
+
+func MethodMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		log.Println(next)
+		w.Header().Set("Content-Type", "application/json")
+		switch r.Method {
+		case "POST":
+			next.ServeHTTP(w, r)
+		default:
+			log.Println("not POST request")
+			w.WriteHeader(http.StatusNotFound)
+			w.Write([]byte(`{"error": "Internal server error"}`))
+		}
+	})
+}
 func HasLetters(s string) bool {
 	for _, r := range s {
 		if r >= 'a' && r <= 'z' || r >= 'A' && r <= 'Z' {
@@ -111,7 +155,7 @@ func CalcHandler(w http.ResponseWriter, r *http.Request) {
 	default:
 		log.Println("not POST request")
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte(`{"error": "Internal server error"}`))
+		w.Write([]byte(`{"error": "Not Found"}`))
 	}
 }
 
@@ -148,10 +192,15 @@ func nihao(w http.ResponseWriter, req *http.Request) {
 
 func (a Application) RunServer() {
 	log.Println("Server Run...\nhttp://localhost:8080/api/v1/calculate")
-	http.HandleFunc("/hello", hello)
-	http.HandleFunc("/nihao", nihao)
-	http.HandleFunc("/api/v1/calculate", CalcHandler)
+
+	mux := http.NewServeMux()
+
+	mux.HandleFunc("/hello", hello)
+	mux.HandleFunc("/nihao", nihao)
+	mux.HandleFunc("/api/v1/calculate", CalcHandler)
 	//return http.ListenAndServe(":"+a.config.Addr, nil)
 
-	log.Fatal(http.ListenAndServe(":"+a.config.Addr, nil))
+	handler := LoggingMiddleware(RecoveryMiddleware(MethodMiddleware(mux)))
+
+	log.Fatal(http.ListenAndServe(":"+a.config.Addr, handler))
 }
